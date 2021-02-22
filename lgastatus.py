@@ -4,7 +4,7 @@ url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSshBgCbldwtXKoqWsumyzaG6
 response = urllib.request.urlopen(url)
 lines = [l.decode('utf-8') for l in response.readlines()]
 zoneReader = csv.reader(lines, delimiter = ",")
-lga = input("Search LGA: ")
+lga = input("Search LGA: ").capitalize()
 for cols in zoneReader:
     if lga in cols[1]:
         if cols[2] == "green":
@@ -13,3 +13,5 @@ for cols in zoneReader:
             print("Eligible for a permit. Test required within 72 hours of arrival, self-quarantine until negative test received.")
         elif cols[2] == "red":
             print("Not eligible for a permit without an exception, Specified Worker Permit, transit permit or exemption.")
+        else:
+            print("LGA not found.")
